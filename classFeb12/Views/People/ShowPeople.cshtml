@@ -1,0 +1,57 @@
+﻿@using classFeb12.Models
+@model ShowPeopleViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ShowPeople</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="container mt-5"> 
+        <div class="row">
+            <a href="/people/addpersonform" class="btn btn-dark col-md-6 offset-3">Add Person</a>
+        </div>
+        <div class="row mt-4">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Age</th>
+                        <th>Delete/Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Person person in Model.people)
+                    {
+                        <tr>
+                            <td>@person.FirstName</td>
+                            <td>@person.LastName</td>
+                            <td>@person.Age</td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                    <form action="/people/hiddendelete" method="post">
+                                        <input type="hidden" value="@person.Id" name="id" />
+                                        <button class="btn btn-danger w-100">Delete</button>
+                                    </form>
+                                </div>
+                                <div class="col-md-3">
+                                    <a href="/people/edit?id=@person.Id" class="btn btn-info w-100">Edit</a>
+                                </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
